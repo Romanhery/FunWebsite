@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Neural Play</title>
+
+<!-- Link to your external CSS -->
+<link rel="stylesheet" href="style.css" />
+
+<!-- AOS CSS -->
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+</head>
+<body>
+    <!-- Background -->
+    <img class="img-gradient" src="gradient.png" alt="colorful gradient background" data-aos="fade-left" data-aos-duration="1000" />
+    <div class="layer-blur" data-aos="fade-left" data-aos-delay="200"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header data-aos="fade-down" data-aos-duration="800">
+            <h1 class="logo">CODE</h1>
+
+            <!-- Desktop Nav -->
+            <nav>
+                <a href="about.html" data-aos="fade-down" data-aos-delay="100">ABOUT</a>
+                <a href="website.html" data-aos="fade-down" data-aos-delay="200">FEATURES</a>
+                <a href="contact.html" data-aos="fade-down" data-aos-delay="300">CONTACT</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <div class="menu-toggle" id="menu-toggle" aria-label="Menu" aria-expanded="false" role="button" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <!-- Mobile Nav -->
+            <div class="mobile-nav" id="mobile-nav">
+                <a href="s.html">COMPANY</a>
+                <a href="s.html">FEATURES</a>
+                <a href="s.html">CONTACT</a>
+                <a href="s.html">RESOURCES</a>
+                <button class="btn-signin">SIGN IN</button>
+            </div>
+
+            <button class="btn-signin" data-aos="fade-down" data-aos-delay="500">SIGN IN</button>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <div class="content" data-aos="fade-up" data-aos-duration="1000">
+                <div class="tag-box" data-aos="zoom-in">
+                    <div class="tag">INTRODUCING ▲</div>
+                </div>
+                <h1 data-aos="fade-right" data-aos-delay="200">EMAIL FOR<br /> DEVELOPERS</h1>
+                <p class="description" data-aos="fade-right" data-aos-delay="300">
+                    Great Neural Network Playground, Visualization, Learning, Training — All In The Same Place.
+                </p>
+
+                <div class="buttons" data-aos="fade-up" data-aos-delay="400">
+                    <a href="docs.html" class="btn-get-started">Documentation &gt;</a>
+                    <a href="get-started.html" class="btn-signin-main">Get Started &gt;</a>
+                </div>
+            </div>
+
+            <!-- 3D Model -->
+            <spline-viewer
+                url="https://prod.spline.design/JyZxPoJktIrDR-8O/scene.splinecode"
+                class="robot-3d"
+                data-aos="fade-left"
+                data-aos-delay="500"
+            ></spline-viewer>
+        </main>
+    </div>
+
+    <!-- Spline Viewer Script -->
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.44/build/spline-viewer.js"></script>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+    <!-- Mobile Menu + AOS Refresh -->
+    <script>
+        // Initialize AOS
+        AOS.init({
+            once: true,
+            offset: 100,
+        });
+
+        const toggle = document.getElementById('menu-toggle');
+        const mobileNav = document.getElementById('mobile-nav');
+
+        if (toggle && mobileNav) {
+            toggle.addEventListener('click', () => {
+                const expanded = toggle.classList.toggle('active');
+                mobileNav.classList.toggle('show');
+                toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+                AOS.refresh();
+            });
+
+            // Keyboard accessibility for menu toggle (Enter/Space)
+            toggle.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggle.click();
+                }
+            });
+        }
+
+        // Refresh AOS after Spline model is loaded
+        const splineViewer = document.querySelector('spline-viewer');
+        if (splineViewer) {
+            splineViewer.addEventListener('load', () => {
+                AOS.refresh();
+            });
+        }
+    </script>
+</body>
+</html>
